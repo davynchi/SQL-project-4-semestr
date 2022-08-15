@@ -1,0 +1,33 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:14.1
+    container_name: "postgres_db"
+    environment:
+      - POSTGRES_USER=mikhail
+      - POSTGRES_PASSWORD=ak8Yt9zMJtS3Q825
+      - POSTGRES_DB=manga_publisher
+      - POSTGRES_PORT=5432
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/pgdata
+    ports:
+      - "5432:5432"
+    restart: always
+#    env_file: # для хранения secrets правильнее использовать .env-файл
+#      - .env
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: "manga_publisher"
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=davydov.mv@phystech.edu
+      - PGADMIN_DEFAULT_PASSWORD=ak8Yt9zMJtS3Q825
+    volumes:
+      - data_pgadmin:/var/lib/pgadmin
+    ports:
+      - "8080:80"
+
+volumes:
+  postgres_data:
+  data_pgadmin:
